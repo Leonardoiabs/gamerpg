@@ -84,8 +84,11 @@
                 </div>
             </div>
             <div class="text-center mt-3">
-                <a href="{% url 'delete_card' card.id %}">Excluir este Card</a>
+                <button type="button" class="btn btn-danger">
+                    <a href="{% url 'delete_card' card.id %}">Excluir este Card</a>
             </div>
+                </button>
+
         </div>
         <div class="col-4"></div>
     </div>

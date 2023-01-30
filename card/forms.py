@@ -27,22 +27,3 @@ class AddCardForm(ModelForm):
             'ataque',
             'defesa',
         ]
-
-# class AddTerrenoForm(ModelForm):
-#
-#     def clean_nome(self):
-#         nome = self.cleaned_data['nome'].upper()
-#         return nome
-#
-#     class Meta:
-#         modal = Terreno
-#         widgets = {
-#             'nome': forms.TextInput(attrs={'class': 'form-control'}),
-#             'tipo': forms.Select(attrs={'class': 'form-control'}),
-#             'modificador': forms.IntegerField(attrs={'class': 'form-control'}),
-#         }
-#         fields = [
-#             'nome',
-#             'tipo',
-#             'modificador'
-#         ]

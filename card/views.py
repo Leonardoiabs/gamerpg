@@ -47,15 +47,3 @@ def deleteCard(request, pk):
     Card.objects.filter(id=pk).delete()
     cards = Card.objects.all()
     return render(request, '02_card/list.html', {'cards': cards})
-
-
-# def addTerreno(request):
-#     if request.method == 'POST':
-#         form = AddTerrenoForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             terreno = form.save(commit=False)
-#             terreno.save()
-#             return redirect(reverse_lazy('add_terreno'))
-#     else:
-#         form = AddTerrenoForm()
-#     return render(request, '03_terreno/add-terreno.html', locals())

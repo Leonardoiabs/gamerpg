@@ -15,16 +15,3 @@ class Card(models.Model):
     descricao = models.TextField(verbose_name='DESCRICAO', max_length=1000)
     ataque = models.IntegerField(verbose_name='PODER DE ATAQUE')
     defesa = models.IntegerField(verbose_name='PODER DE DEFESA')
-
-
-# class TipoDeTerreno(models.Model):
-#     nome = models.CharField(max_length=100)
-#
-#     def __str__(self):
-#         return self.nome
-#
-#
-# class Terreno(models.Model):
-#     nome = models.CharField(verbose_name='NOME DO TERRENO', max_length=100)
-#     tipo = models.ManyToManyField(TipoDeTerreno, verbose_name='TIPO DE TERRENO')
-#     modificador = models.IntegerField(verbose_name='MODIFICADOR DO TERRENO')
