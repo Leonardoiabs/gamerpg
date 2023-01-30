@@ -1,0 +1,48 @@
+{% extends '00_base/base.html' %}
+
+{% block css_container %}{% endblock css_container %}
+
+{% block container %}
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">NOME</th>
+                <th scope="col">TIPO</th>
+                <th scope="col">ATAQUE</th>
+                <th scope="col">DEFESA</th>
+                <th scope="col">VER MAIS</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for card in cards %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>
+                    <a href="{% url 'update_card' card.id %}">
+                        {{ card.nome }}
+                    </a>
+                </td>
+                <td>{{ card.tipo.nome }}</td>
+                <td>{{ card.ataque }}</td>
+                <td>{{ card.defesa }}</td>
+                <td>
+                    <a href="{% url 'view_card' card.id %}">
+                        <button type="button" class="btn btn-link">VER MAIS</button>
+                    </a>
+                </td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="6">
+                    <div class="text-center">NENHUMA CARTA CADASTRADA</div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock container %}
+
+{% block js_container %}{% endblock js_container %}
