@@ -1,10 +1,96 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends '00_base/base.html' %}
 
-</body>
-</html>
+{% block css_container %}
+    <style>
+        .terreno {
+            background-color: burlywood;
+            /*background-image: url("https://img.freepik.com/free-vector/floral-ornamental-abstract-background_52683-30016.jpg?w=2000");*/
+            width: 100%;
+            padding: 25px;
+            border-radius: 18px;
+        }
+        .terreno_nome {
+            background-color: darkgoldenrod;
+            /*background-image: url("https://img.freepik.com/fotos-premium/textura-abstrata-de-bege-escuro-padrao-de-forma-de-favo-de-mel-plano-de-fundo-do-projeto_317169-1184.jpg");*/
+            width: 100%;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            color: #FFF;
+            font-weight: bold;
+            padding: 2px 10px;
+        }
+        .terreno_img {
+            background-image: url("{{ terreno.imagem.url }}");
+            width: 100%;
+            height: 180px;
+            border-radius: 16px;
+            margin-bottom: 20px;
+        }
+        .terreno_tipo {
+            background-image: url("https://img.freepik.com/fotos-premium/textura-abstrata-de-bege-escuro-padrao-de-forma-de-favo-de-mel-plano-de-fundo-do-projeto_317169-1184.jpg");
+            width: 100%;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            color: #FFF;
+            font-weight: bold;
+            padding: 2px 10px;
+        }
+        .terreno_desc {
+            background-image: url("https://img.freepik.com/fotos-gratis/fundo-preto-antigo-textura-do-grunge-papel-de-parede-escuro-blackboard-chalkboard-betao_1258-70485.jpg?w=2000");
+            width: 100%;
+            height: 100px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            color: #FFF;
+            font-size: 12px;
+            padding: 2px 10px;
+        }
+        .terreno_modificador {
+            background-image: url("https://img.freepik.com/fotos-premium/textura-abstrata-de-bege-escuro-padrao-de-forma-de-favo-de-mel-plano-de-fundo-do-projeto_317169-1184.jpg");
+            width: 100%;
+            border-radius: 6px;
+            color: #FFF;
+            font-weight: bold;
+            padding: 2px 10px;
+        }
+        .terreno_ataque {
+            color: #FFF;
+            width: 50%;
+            text-align: center;
+        }
+        .terreno_defesa {
+            color: #FFF;
+            width: 50%;
+            text-align: center;
+        }
+
+    </style>
+{% endblock css_container %}
+
+{% block container %}
+
+    <div class="row">
+        <div class="col-4"></div>
+            <div class="col-4">
+                <div class="terreno">
+                    <div class="terreno_nome">{{ terreno.nome }}</div>
+                    <div class="terreno_img"></div>
+                    <div class="terreno_tipo">{{ terreno.tipo.nome }}</div>
+                    <div class="terreno_desc">{{ terreno.descricao }}</div>
+                    <div class="terreno_modificador">
+                        <div class="terreno_ataque">ATK: +{{ terreno.tipo_terreno.ataque_positivo }} / ATK: -{{ terreno.tipo_terreno.ataque_negativo }}</div>
+                        <div class="terreno-defesa">DEF: +{{ terreno.tipo_terreno.defesa_positiva }} / DEF: -{{ terreno.tipo_terreno.defesa_negativa }}</div>
+                    </div>
+                </div>
+                <div class="text-center mt-3">
+                    <button type="button" class="btn btn-danger">
+                        <a href="{% url 'delete_terreno' terreno.id %}">Excluir este Card</a>
+                    </button>
+                </div>
+            </div>
+        <div class="col-4"></div>
+    </div>
+
+{% endblock container %}
+
+{% block js_container %}{% endblock js_container %}

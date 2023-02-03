@@ -1,10 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends '00_base/base.html' %}
 
-</body>
-</html>
+{% block css_container %}{% endblock css_container %}
+
+{% block container %}
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">NOME</th>
+                <th scope="col">TIPO DE TERRENO</th>
+                <th scope="col">DESCRIÇÃO</th>
+                <th scope="col">VER MAIS</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for terreno in terrenos %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>
+                    <a href="{% url 'update_terreno' terreno.id %}">
+                        {{ terreno.nome }}
+                    </a>
+                </td>
+                <td>{{ terreno.tipo_terreno.nome }}</td>
+                <td>{{ terreno.descricao }}</td>
+                <td>
+                    <a href="{% url 'view_terreno' terreno.id %}">
+                        <button type="button" class="btn btn-link">VER MAIS</button>
+                    </a>
+                </td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="5">
+                    <div class="text-center">NENHUM TERRENO CADASTRADO</div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock container %}
+
+{% block js_container %}{% endblock js_container %}

@@ -4,11 +4,11 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('terreno/add/', addTerreno, name="add_terreno"),
-    path('terreno/list/', listTerreno, name="list_terreno"),
-    path('terreno/<int:pk>/view/', viewTerreno, name="view_terreno"),
-    path('terreno/<int:pk>/update/', updateTerreno, name="update_terreno"),
-    path('terreno/<int:pk>/delete/', deleteTerreno, name="detele_terreno"),
+    path('add/', addTerreno, name="add_terreno"),
+    path('list/', listTerreno, name="list_terreno"),
+    path('<int:pk>/view/', viewTerreno, name="view_terreno"),
+    path('<int:pk>/update/', updateTerreno, name="update_terreno"),
+    path('<int:pk>/delete/', deleteTerreno, name="delete_terreno"),
 ]
 
 if settings.DEBUG:

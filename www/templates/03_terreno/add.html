@@ -3,8 +3,43 @@
 {% block css_container %}{% endblock css_container %}
 
 {% block container %}
-    add terreno
-
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.errors }}
+       <div class="row">
+           <div class="col">
+                <div class="form-group">
+                    <label for="{{ form.nome.id_for_label }}">{{ form.nome.label }}</label>
+                    {{ form.nome }}
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="{{ form.tipo_terreno.id_for_label }}">{{ form.tipo_terreno.label }}</label>
+                    {{ form.tipo_terreno }}
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="{{ form.imagem.id_for_label }}">{{ form.imagem.label }}</label>
+                    {{ form.imagem }}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="{{ form.descricao.id_for_label }}">{{ form.descricao.label }}</label>
+                    {{ form.descricao }}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button type="submit" class="btn btn-primary">Criar Terreno</button>
+            </div>
+        </div>
+    </form>
 {% endblock container %}
 
 {% block js_container %}{% endblock js_container %}
