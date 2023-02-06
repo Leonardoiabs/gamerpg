@@ -9,6 +9,10 @@ class TipoDoTerreno(models.Model):
     defesa_negativa = models.IntegerField(verbose_name='REDUÇÃO DE DEFESA')
 
 
+    def __str__(self):
+        return self.nome
+
+
 class Terreno(models.Model):
     nome = models.CharField(verbose_name='NOME DO TERRENO', max_length=100)
     imagem = models.FileField(verbose_name='IMAGEM', upload_to='terreno')

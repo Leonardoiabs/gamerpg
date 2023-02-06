@@ -1,0 +1,28 @@
+{% extends '00_base/base.html' %}
+
+{% block css_container %}
+    <style>
+    </style>
+{% endblock css_container %}
+
+{% block container %}
+
+    <div class="row">
+        <div class="col-4"></div>
+            <div class="col-4">
+                <div class="jogador">
+                    <div class="jogador_nome">{{ jogador.nome }}</div>
+                    <div class="jogador_img"></div>
+                </div>
+                <div class="text-center mt-3">
+                    <button type="button" class="btn btn-danger">
+                        <a href="{% url 'delete_jogador' jogador.id %}">Excluir este Jogador(a)</a>
+                    </button>
+                </div>
+                <br>
+            </div>
+    </div>
+
+{% endblock container %}
+
+{% block js_container %}{% endblock js_container %}

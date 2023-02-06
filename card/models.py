@@ -1,5 +1,5 @@
 from django.db import models
-
+from jogo.models import Jogador
 
 class Tipo(models.Model):
     nome = models.CharField(max_length=100)
@@ -15,3 +15,16 @@ class Card(models.Model):
     descricao = models.TextField(verbose_name='DESCRICAO', max_length=1000)
     ataque = models.IntegerField(verbose_name='PODER DE ATAQUE')
     defesa = models.IntegerField(verbose_name='PODER DE DEFESA')
+
+
+class Deck(models.Model):
+    nome = models.CharField(verbose_name='NOME DO DECK', max_length=100)
+    jogador = models.ForeignKey(Jogador, on_delete=models.DO_NOTHING, verbose_name='JOGADOR')
+
+
+
+class DeckCard(models.Model):
+    deck = models.ForeignKey(Deck, on_delete=models.DO_NOTHING, verbose_name='DECK')
+    card = models.ForeignKey(Card, on_delete=models.DO_NOTHING, verbose_name='CARD')
+
+

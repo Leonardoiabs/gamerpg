@@ -1,0 +1,42 @@
+{% extends '00_base/base.html' %}
+
+{% block css_container %}{% endblock css_container %}
+
+{% block container %}
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">NOME</th>
+                <th scope="col">VER MAIS</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for jogador in jogadores %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>
+                    <a href="{% url 'update_jogador' jogador.id %}">
+                        {{ jogador.nome }}
+                    </a>
+                </td>
+                <td>
+                    <a href="{% url 'view_jogador' jogador.id %}">
+                        <button type="button" class="btn btn-link">VER MAIS</button>
+                    </a>
+                </td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="5">
+                    <div class="text-center">NENHUM JOGADOR CADASTRADO</div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock container %}
+
+{% block js_container %}{% endblock js_container %}
