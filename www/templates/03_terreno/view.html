@@ -21,6 +21,8 @@
         }
         .terreno_img {
             background-image: url("{{ terreno.imagem.url }}");
+            background-size: cover;
+            background-repeat: no-repeat;
             width: 100%;
             height: 180px;
             border-radius: 16px;
@@ -79,7 +81,7 @@
                     <div class="terreno_desc">{{ terreno.descricao }}</div>
                     <div class="terreno_modificador">
                         <div class="terreno_ataque">ATK: +{{ terreno.tipo_terreno.ataque_positivo }} / ATK: -{{ terreno.tipo_terreno.ataque_negativo }}</div>
-                        <div class="terreno-defesa">DEF: +{{ terreno.tipo_terreno.defesa_positiva }} / DEF: -{{ terreno.tipo_terreno.defesa_negativa }}</div>
+                        <div class="terreno_defesa">DEF: +{{ terreno.tipo_terreno.defesa_positiva }} / DEF: -{{ terreno.tipo_terreno.defesa_negativa }}</div>
                     </div>
                 </div>
                 <div class="text-center mt-3">
@@ -87,8 +89,8 @@
                         <a href="{% url 'delete_terreno' terreno.id %}">Excluir este Card</a>
                     </button>
                 </div>
+                <br>
             </div>
-        <div class="col-4"></div>
     </div>
 
 {% endblock container %}
