@@ -9,7 +9,8 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">NOME</th>
-                <th scope="col">VER MAIS</th>
+                <th scope="col">MONTAR DECK</th>
+                <th scope="col">VIZUALIZAR</th>
             </tr>
         </thead>
         <tbody>
@@ -24,6 +25,11 @@
                 <td>
                     <a href="{% url 'deck_add_cards' deck.id %}">
                         <button type="button" class="btn btn-link">ADD CARD</button>
+                    </a>
+                </td>
+                <td>
+                    <a href="{% url 'view_deck' deck.id %}">
+                        <button type="button" class="btn btn-info">VER DECK</button>
                     </a>
                 </td>
             </tr>
