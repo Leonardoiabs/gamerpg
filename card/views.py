@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
-from card.models import Card
-from card.forms import AddCardForm
+from django.urls import reverse_lazy, reverse
+from card.models import Card, Deck, DeckCard
+from card.forms import AddCardForm, AddDeckForm, DeckAddCardForm
 
 
 def home(request):
@@ -47,3 +47,60 @@ def deleteCard(request, pk):
     Card.objects.filter(id=pk).delete()
     cards = Card.objects.all()
     return render(request, '02_card/list.html', {'cards': cards})
+
+
+def addDeck(request):
+    if request.method == 'POST':
+        form = AddDeckForm(request.POST)
+        if form.is_valid():
+            deck = form.save(commit=False)
+            deck.save()
+            return redirect(reverse_lazy('list_deck'))
+    else:
+        form = AddDeckForm()
+    return render(request, '02_card/deck/add.html', locals())
+
+
+def listDeck(request):
+    decks = Deck.objects.all()
+    return render(request, '02_card/deck/list.html', {'decks': decks})
+
+
+def viewDeck(request, pk):
+    deck = Deck.objects.filter(id=pk).first()
+    return render(request, '02_card/deck/view.html', {'deck': deck})
+
+
+def updateDeck(request, pk):
+    deck = Deck.objects.filter(id=pk).first()
+    if request.method == 'POST':
+        form = AddDeckForm(request.POST or None, instance=deck)
+        if form.is_valid():
+            deck = form.save(commit=False)
+            deck.save()
+            return redirect(reverse_lazy('add_deck'))
+        else:
+            form = AddDeckForm(instance=deck)
+        return render(request, '02_card/deck/add.html', locals())
+
+
+def deleteDeck(request, pk):
+    Deck.objects.filter(id=pk).delete()
+    decks = Deck.objects.all()
+    return render(request, '02_card/deck/list.html', {'decks': decks})
+
+
+def deckAddCards(request, pk_deck):
+    deck_cards = DeckCard.objects.filter(deck=pk_deck)
+    cartas_disponiveis = Card.objects.all().exclude(id__in=deck_cards.values_list('card__id', flat=True))
+    if request.method == 'POST':
+        form = DeckAddCardForm(request.POST)
+        if form.is_valid():
+            deck = Deck.objects.filter(id=pk_deck).first()
+            form = form.save(commit=False)
+            form.deck = deck
+            form.save()
+            return redirect(reverse('deck_add_cards', args=[deck.id]))
+    else:
+        form = DeckAddCardForm()
+    return render(request, '02_card/deck/add_card.html', locals())

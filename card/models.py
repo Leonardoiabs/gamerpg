@@ -16,6 +16,9 @@ class Card(models.Model):
     ataque = models.IntegerField(verbose_name='PODER DE ATAQUE')
     defesa = models.IntegerField(verbose_name='PODER DE DEFESA')
 
+    def __str__(self):
+        return self.nome
+
 
 class Deck(models.Model):
     nome = models.CharField(verbose_name='NOME DO DECK', max_length=100)

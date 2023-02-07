@@ -1,0 +1,49 @@
+{% extends '00_base/base.html' %}
+
+{% block css_container %}{% endblock css_container %}
+
+{% block container %}
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.errors }}
+       <div class="row">
+           <div class="col">
+                <div class="form-group">
+                    <label for="{{ form.card.id_for_label }}">{{ form.card.label }}</label>
+{#                    {{ form.card }}#}
+                        <select name="card" class="form-control" required="" id="id_card">
+                          <option value="" selected="">SELECIONE UMA CARTA</option>
+                          {% for carta in cartas_disponiveis %}
+                          <option value="{{ carta.id }}">{{ carta.nome|upper }}</option>
+                          {% endfor %}
+                        </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button type="submit" class="btn btn-primary">Add Card</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="row">
+        <div class="col-12">
+            <h1>MINHAS CARTAS</h1>
+        </div>
+        <div class="col-12">
+{#            <div class="row">#}
+                {% for card in deck_cards %}
+{#                <div class="col-md-3">#}
+                    {% include '02_card/card_template.html' with card=card.card %}
+{#                </div>#}
+                {% empty %}
+                <h3>NENHUMA CARTA CADASTRADA</h3>
+                {% endfor %}
+{#            </div>#}
+
+        </div>
+    </div>
+{% endblock container %}
+
+{% block js_container %}{% endblock js_container %}

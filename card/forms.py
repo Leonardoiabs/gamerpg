@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from card.models import Card
+from card.models import Card, Deck, DeckCard
 
 
 class AddCardForm(ModelForm):
@@ -26,4 +26,34 @@ class AddCardForm(ModelForm):
             'descricao',
             'ataque',
             'defesa',
+        ]
+
+
+class AddDeckForm(ModelForm):
+
+    def clean_nome(self):
+        nome = self.cleaned_data['nome'].upper()
+        return nome
+
+    class Meta:
+        model = Deck
+        widgets = {
+            'nome': forms.TextInput(attrs={'class': 'form-control'}),
+            'jogador': forms.Select(attrs={'class': 'form-control'}),
+        }
+        fields = [
+            'nome',
+            'jogador',
+        ]
+
+
+class DeckAddCardForm(ModelForm):
+
+    class Meta:
+        model = DeckCard
+        widgets = {
+            'card': forms.Select(attrs={'class': 'form-control'}),
+        }
+        fields = [
+            'card',
         ]
