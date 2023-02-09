@@ -11,18 +11,30 @@
                 <div class="form-group">
                     <label for="{{ form.card.id_for_label }}">{{ form.card.label }}</label>
 {#                    {{ form.card }}#}
-                        <select name="card" class="form-control" required="" id="id_card">
-                          <option value="" selected="">SELECIONE UMA CARTA</option>
-                          {% for carta in cartas_disponiveis %}
-                          <option value="{{ carta.id }}">{{ carta.nome|upper }}</option>
-                          {% endfor %}
-                        </select>
+                    <select name="card" class="form-control" required="" id="id_card">
+                        <option value="" selected="">SELECIONE UMA CARTA</option>
+                        {% for carta in cartas_disponiveis %}
+                            {% if cartas_do_deck.count == 6 %}
+                                {% if carta.id in cartas_do_deck %}
+                                <option value="{{ carta.id }}">{{ carta.nome|upper }} ------------------------- (CARTA SELECIONADA)</option>
+                                {% endif %}
+                            {% else %}
+                            <option value="{{ carta.id }}">
+                                {% if carta.id in cartas_do_deck %}
+                                    {{ carta.nome|upper }} ------------------------- (CARTA SELECIONADA)
+                                {% else %}
+                                    {{ carta.nome|upper }}
+                                {% endif %}
+                            </option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col">
-                <button type="submit" class="btn btn-primary">Add Card</button>
+                <button type="submit" class="btn btn-primary">Add Card / Remove Card</button>
             </div>
         </div>
     </form>
@@ -33,15 +45,15 @@
         </div>
         <div class="col-12">
         
-{#            <div class="row">#}
-                {% for card in deck_cards %}
-{#                <div class="col-md-3">#}
-                    {% include '02_card/card_template.html' with card=card.card %}
-{#                </div>#}
+            <div class="row">
+                {% for card in deck.deckcard_set.all %}
+                    <div class="col-md-4 mt-3">
+                        <img src="{{ card.card.imagem.url }}" style="width: 100%">
+                    </div>
                 {% empty %}
                 <h3>NENHUMA CARTA CADASTRADA</h3>
                 {% endfor %}
-{#            </div>#}
+            </div>
 
         </div>
     </div>

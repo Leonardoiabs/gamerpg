@@ -91,15 +91,20 @@ def deleteDeck(request, pk):
 
 
 def deckAddCards(request, pk_deck):
-    deck_cards = DeckCard.objects.filter(deck=pk_deck)
-    cartas_disponiveis = Card.objects.all().exclude(id__in=deck_cards.values_list('card__id', flat=True))
+    cartas_disponiveis = Card.objects.all()
+    deck = Deck.objects.filter(id=pk_deck).first()
+    cartas_do_deck = deck.deckcard_set.all().values_list('card_id', flat=True)
+
     if request.method == 'POST':
         form = DeckAddCardForm(request.POST)
         if form.is_valid():
-            deck = Deck.objects.filter(id=pk_deck).first()
             form = form.save(commit=False)
-            form.deck = deck
-            form.save()
+            if not deck.deckcard_set.filter(card=form.card).exists():
+                if deck.deckcard_set.all().count() < 6:
+                    form.deck = deck
+                    form.save()
+            else:
+                deck.deckcard_set.filter(card=form.card).delete()
             return redirect(reverse('deck_add_cards', args=[deck.id]))
     else:
         form = DeckAddCardForm()
