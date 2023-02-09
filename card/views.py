@@ -79,9 +79,9 @@ def updateDeck(request, pk):
             deck = form.save(commit=False)
             deck.save()
             return redirect(reverse_lazy('add_deck'))
-        else:
-            form = AddDeckForm(instance=deck)
-        return render(request, '02_card/deck/add.html', locals())
+    else:
+        form = AddDeckForm(instance=deck)
+    return render(request, '02_card/deck/add.html', locals())
 
 
 def deleteDeck(request, pk):

@@ -8,7 +8,7 @@
         {% for card in cards %}
         <div class="col mb-2">
             <div class="card" style="width: 12rem;">
-                <a href="{% url 'update_card' card.id %}">
+                <a href="{% url 'view_card' card.id %}">
                     <img class="card-img-top" src="{{ card.imagem.url }}" alt="Card image"
                          data-toggle="tooltip" data-placement="top" title="{{ card.descricao }}">
                 </a>
