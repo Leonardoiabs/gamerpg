@@ -7,3 +7,6 @@ class Jogador(models.Model):
 
     def __str__(self):
         return self.nome
+
+class Partida(models.Model):
+    deck = models.ForeignKey('card.Deck', on_delete=models.DO_NOTHING, verbose_name='DECK', related_name='partida_deck')

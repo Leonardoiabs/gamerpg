@@ -24,6 +24,9 @@ class Deck(models.Model):
     nome = models.CharField(verbose_name='NOME DO DECK', max_length=100)
     jogador = models.ForeignKey(Jogador, on_delete=models.DO_NOTHING, verbose_name='JOGADOR')
 
+    def __str__(self):
+        return self.nome
+
 
 
 class DeckCard(models.Model):

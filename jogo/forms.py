@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from jogo.models import Jogador
+from jogo.models import Jogador, Partida
 
 
 class AddJogadorForm(ModelForm):
@@ -17,4 +17,14 @@ class AddJogadorForm(ModelForm):
         fields = [
             'nome',
             'imagem',
+        ]
+
+
+class AddDeckPartida(ModelForm):
+
+    class Meta:
+        model = Partida
+
+        fields = [
+            'deck',
         ]

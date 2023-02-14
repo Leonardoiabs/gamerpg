@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from jogo.models import Jogador
-from jogo.forms import AddJogadorForm
+from jogo.forms import AddJogadorForm, AddDeckPartida
 
 
 def home(request):
@@ -47,3 +47,13 @@ def deleteJogador(request, pk):
     Jogador.objects.filter(id=pk).delete()
     jogadores = Jogador.objects.all()
     return render(request, '04_jogo/jogador/list.html', {'jogadores': jogadores})
+
+def partidaAddDeck(request):
+    if request.method == 'POST':
+        form = AddDeckPartida(request.POST)
+        if form.is_valid():
+            deck = form.save(commit=False)
+            deck.save()
+    else:
+        form = AddDeckPartida()
+    return render(request, '04_jogo/partida/add_deck_partida.html', locals())

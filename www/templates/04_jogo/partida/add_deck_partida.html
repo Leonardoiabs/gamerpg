@@ -1,0 +1,27 @@
+{%  extends '00_base/base.html' %}
+
+{% block css_container %}{%  endblock css_container %}
+
+{% block container %}
+    <form method="POST" enctype="multipart/form-data">
+        {%  csrf_token %}
+        {{ form.errors }}
+        <div class="row">
+            <div class="col">
+                <h2>Escolha um Deck para Jogar</h2>
+                <hr>
+                <div class="form-group">
+                    <label>{{ form }}</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button type="submit" class="btn btn-primary">Ir para o Jogo</button>
+            </div>
+        </div>
+    </form>
+
+{% endblock container %}
+
+{% block js_container %}{% endblock js_container %}
